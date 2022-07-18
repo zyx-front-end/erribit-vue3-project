@@ -2,18 +2,7 @@
   <header class="app-header">
     <div class="container">
       <h1 class="logo"><router-link to="/">小兔鲜</router-link></h1>
-      <ul class="navs">
-        <li class="home"><router-link to="/">首页</router-link></li>
-        <li><a href="#">美食</a></li>
-        <li><a href="#">餐厨</a></li>
-        <li><a href="#">艺术</a></li>
-        <li><a href="#">电器</a></li>
-        <li><a href="#">居家</a></li>
-        <li><a href="#">洗护</a></li>
-        <li><a href="#">孕婴</a></li>
-        <li><a href="#">服装</a></li>
-        <li><a href="#">杂货</a></li>
-      </ul>
+      <AppHeaderNav/>
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜" />
@@ -28,8 +17,12 @@
 </template>
 
 <script>
+import AppHeaderNav from './app-header-nav.vue'
 export default {
   name: "AppHeader",
+  components:{
+    AppHeaderNav
+  }
 };
 </script>
 
@@ -51,26 +44,7 @@ export default {
       background: url(../assets/images/logo.png) no-repeat center 18px / contain;
     }
   }
-  .navs {
-    width: 820px;
-    display: flex;
-    justify-content: space-around;
-    padding-left: 40px;
-    li {
-      margin-right: 40px;
-      width: 38px;
-      text-align: center;
-    }
-    a {
-      font-size: 16px;
-      height: 32px;
-      line-height: 32px;
-      display: inline-block;
-      &:hover {
-        color: @xtxColor;
-      }
-    }
-  }
+  
   .search{
       width: 170px;
       height:32px;

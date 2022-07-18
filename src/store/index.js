@@ -3,14 +3,14 @@ import createPersistedstate from 'vuex-persistedstate'
 // 子模块的引入
 import cart from "./module/cart";
 import user from "./module/user";
-import catagory from "./module/catagory";
+import category from "./module/category";
 
 // 创建store仓库实例 并暴露出去
 export default createStore({
   modules:{
     cart,
     user,
-    catagory
+    category
   },
   // vuex持久化设计
   plugins:[
