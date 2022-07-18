@@ -1,103 +1,25 @@
-import {
-  createStore
-} from 'vuex'
-// vue2.0 创建仓库 new Vuex.store({})
-// vue3.0 创建仓库 createStore({})
-// A模块
-// B模块
-const moduleA = {
-  state: () => {
-    return {
-      username: '模块A'
-    }
-  },
-  getters: {
-    changeName(state) {
-      return state.username + 'aaaaaa'
-    }
-  }
-}
+import { createStore } from "vuex";
+import createPersistedstate from 'vuex-persistedstate'
+// 子模块的引入
+import cart from "./module/cart";
+import user from "./module/user";
+import catagory from "./module/catagory";
 
-const moduleB = {
-  namespaced: true,
-  state: () => {
-    return {
-      username: 'B模块'
-    }
-  },
-  getters: {
-    changeName(state) {
-      return state.username + 'bbbbb'
-    }
-  },
-  mutations: {
-    updateName(state) {
-      state.username = 'ls'
-    }
-  },
-  actions: {
-    updateName(ctx) {
-      setTimeout(() => {
-        ctx.commit('updateName')
-      }, 2000)
-    }
-  },
-
-}
+// 创建store仓库实例 并暴露出去
 export default createStore({
-  state: {
-    person: [{
-        id: 1,
-        name: "tom",
-        gender: '男'
-      },
-      {
-        id: 2,
-        name: "lucy",
-        gender: '女'
-      },
-      {
-        id: 3,
-        name: "jack",
-        gender: '男'
-      },
-    ]
+  modules:{
+    cart,
+    user,
+    catagory
   },
-  mutations: {
-    // 改数据函数
-  },
-  actions: {
-    // 请求数据函数
-  },
-  modules: {
-    moduleA,
-    moduleB
-  },
-  getters: {
-    // vuex的计算属性
-    body: state => state.person.filter(p => p.gender === '男')
-  }
+  // vuex持久化设计
+  plugins:[
+    // 默认存储在localStorage
+    createPersistedstate({
+      // 本地存储的名字
+      key:'erabbit-client-pc-store',
+      // 指定需要存储的模块
+      paths:['user','cart']
+    })
+  ]
 })
-// export default createStore({
-//   state: {
-//     username: 'zs'
-//   },
-//   getters: {
-//     newName(state){
-//       return state.username+'zyx'
-//     }
-//   },
-//   mutations: {
-//     updateName(state){
-//        state.username = 'ls'
-//     }
-//   },
-//   actions: {
-//     updateName(ctx){
-//       setTimeout(()=>{
-//         ctx.commit('updateName')
-//       },2000)
-//     }
-//   },
-//   modules: {}
-// })
